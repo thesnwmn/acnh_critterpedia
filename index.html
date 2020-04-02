@@ -60,8 +60,9 @@
                     </div>
                     <div class="navbar-item">
                         <div class="btn-group btn-group-sm mr-2 mb-2 mb-sm-2 mb-md-0" role="group" aria-label="Mode Select" id="modeSelect">
-                            <button type="button" class="btn btn-primary flex-sm-fill" id="modeNow" value="now" onclick="updateModeSelect('modeSelect', 'modeNow')">Now</button>
+                            <button type="button" class="btn btn-primary flex-sm-fill" id="modeAll" value="all" onclick="updateModeSelect('modeSelect', 'modeAll')">All</button>
                             <button type="button" class="btn btn-secondary flex-sm-fill" id="modeToday" value="today" onclick="updateModeSelect('modeSelect', 'modeToday')">Today</button>
+                            <button type="button" class="btn btn-primary flex-sm-fill" id="modeNow" value="now" onclick="updateModeSelect('modeSelect', 'modeNow')">Now</button>
                             <button type="button" class="btn btn-secondary flex-sm-fill" id="modeCustom" value="custom" onclick="updateModeSelect('modeSelect', 'modeCustom')">Custom</button>
                         </div>
                     </div>
@@ -170,9 +171,13 @@
                 setButtonGroup(groupId, buttonId, false);
 
                 var value = getButtonGroup(groupId);
-                if (value === 'now' || value === 'today') {
+                if (value === 'now' || value === 'today' || value === 'all') {
                     var date = new Date();
-                    setSelect('monthSelect', date.getMonth()+1);
+                    if (value === 'all') {
+                        setSelect('monthSelect', '*');
+                    } else {
+                        setSelect('monthSelect', date.getMonth()+1);
+                    }
                     if (value === 'now') {
                         setSelect('hourSelect', date.getHours());
                     } else {

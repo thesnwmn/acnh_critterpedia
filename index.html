@@ -1,0 +1,544 @@
+<html>
+    <head>
+
+        <!--
+            TODO
+            * Offset month display for northern/southern hemisphere
+        -->
+        
+        <script src="lib.js"></script>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- Material Icon font -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+        <style>
+        /* Rules for sizing the icon. */
+        .material-icons.md-18 { font-size: 18px; }
+        .material-icons.md-24 { font-size: 24px; }
+        .material-icons.md-36 { font-size: 36px; }
+        .material-icons.md-48 { font-size: 48px; }
+        .navbar-item .material-icons { font-size: 21px }
+
+        .spacer {
+            height: 70px;
+            content: "";
+        }
+
+        .progress {
+            height: 1.1rem;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+        body{
+            min-width:400px;   
+           width: auto !important;
+          }
+        </style>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-light fixed-top bg-dark">
+            <a class="navbar-brand" href="#">Critters</a>
+            <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end py-sm-3 py-md-0" id="navbarSupportedContent">
+                <div class="navbar-nav">
+                    <div class="navbar-item">
+                        <div class="btn-group btn-group-sm mr-4 mb-sm-2 mb-md-0" role="group" aria-label="Hemisphere Select" id="hemisphereSelect">
+                            <button type="button" class="btn btn-primary" value='northern' onclick="setButtonGroup('hemisphereSelect', 'hemisphereNorth')" id="hemisphereNorth">North</button>
+                            <button type="button" class="btn btn-secondary" value='southern' onclick="setButtonGroup('hemisphereSelect', 'hemisphereSouth')" id="hemisphereSouth">South</button>
+                        </div>
+                    </div>
+                    <div class="navbar-item">
+                        <div class="btn-group btn-group-sm mr-2 mb-sm-2 mb-md-0" role="group" aria-label="Mode Select" id="modeSelect">
+                            <button type="button" class="btn btn-primary" id="modeNow" value="now" onclick="updateModeSelect('modeSelect', 'modeNow')">Now</button>
+                            <button type="button" class="btn btn-secondary" id="modeToday" value="today" onclick="updateModeSelect('modeSelect', 'modeToday')">Today</button>
+                            <button type="button" class="btn btn-secondary" id="modeCustom" value="custom" onclick="updateModeSelect('modeSelect', 'modeCustom')">Custom</button>
+                        </div>
+                    </div>
+                    <div class="form-inline navbar-item" id="timeSelect">
+                        <select class="form-control form-control-sm vertical-align-bottom mr-2" id="monthSelect" class="d-inline">
+                            <option value="*">Any</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <select class="form-control form-control-sm" id="hourSelect">
+                            <option value="*">Any</option>
+                            <option value="0">00:00 - 00:59</option>
+                            <option value="1">01:00 - 01:59</option>
+                            <option value="2">02:00 - 02:59</option>
+                            <option value="3">03:00 - 03:59</option>
+                            <option value="4">04:00 - 04:59</option>
+                            <option value="5">05:00 - 05:59</option>
+                            <option value="6">06:00 - 06:59</option>
+                            <option value="7">07:00 - 07:59</option>
+                            <option value="8">08:00 - 08:59</option>
+                            <option value="9">09:00 - 09:59</option>
+                            <option value="10">10:00 - 10:59</option>
+                            <option value="11">11:00 - 11:59</option>
+                            <option value="12">12:00 - 12:59</option>
+                            <option value="13">13:00 - 13:59</option>
+                            <option value="14">14:00 - 14:59</option>
+                            <option value="15">15:00 - 15:59</option>
+                            <option value="16">16:00 - 16:59</option>
+                            <option value="17">17:00 - 17:59</option>
+                            <option value="18">18:00 - 18:59</option>
+                            <option value="19">19:00 - 19:59</option>
+                            <option value="20">20:00 - 20:59</option>
+                            <option value="21">21:00 - 21:59</option>
+                            <option value="22">22:00 - 22:59</option>
+                            <option value="23">23:00 - 23:59</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="spacer"></div>
+        <div class="container-fluid">
+            <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item border mr-1">
+                  <a class="nav-link active" id="pills-bug-tab" data-toggle="pill" href="#pills-bug" role="tab" aria-controls="pills-bug" aria-selected="true">Bug</a>
+                </li>
+                <li class="nav-item border ml-1">
+                  <a class="nav-link" id="pills-fish-tab" data-toggle="pill" href="#pills-fish" role="tab" aria-controls="pills-fish" aria-selected="false">Fish</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-bug" role="tabpanel" aria-labelledby="pills-bug-tab">
+
+                </div>
+                <div class="tab-pane fade" id="pills-fish" role="tabpanel" aria-labelledby="pills-fish-tab">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      
+        <script>
+
+            var MONTH_STRINGS = [
+                'J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O',' N', 'D'
+            ];
+
+            function setButtonGroup(groupId, buttonId, trigger) {
+
+                var group = document.getElementById(groupId);
+                Array.prototype.slice.call(group.children).forEach(function(btn) {
+                    btn.classList.remove('btn-primary');
+                    btn.classList.add('btn-secondary');
+                });
+
+                var btn = document.getElementById(buttonId);
+                btn.classList.remove('btn-secondary');
+                btn.classList.add('btn-primary');
+
+                if (trigger !== false) {
+                    refresh();
+                }
+            }
+
+            function getButtonGroup(groupId) {
+                return document.getElementById(groupId).getElementsByClassName('btn-primary')[0].value;
+            }
+            
+            function updateModeSelect(groupId, buttonId, trigger) {
+
+                setButtonGroup(groupId, buttonId, false);
+
+                var value = getButtonGroup(groupId);
+                if (value === 'now' || value === 'today') {
+                    var date = new Date();
+                    setSelect('monthSelect', date.getMonth()+1);
+                    if (value === 'now') {
+                        setSelect('hourSelect', date.getHours());
+                    } else {
+                        setSelect('hourSelect', '*');
+                    }
+                    setFormElementState('monthSelect', true);
+                    setFormElementState('hourSelect', true);
+                } else if (value === 'custom') {
+                    var date = new Date();
+                    setSelect('monthSelect', date.getMonth()+1);
+                    setSelect('hourSelect', '*');
+                    setFormElementState('monthSelect', false);
+                    setFormElementState('hourSelect', false);
+                }
+
+                if (trigger !== false) {
+                    refresh();
+                }
+            }
+
+            function setFormElementState(id, enabled) {
+                document.getElementById(id).disabled = enabled;
+            }
+
+            function setSelect(id, valueToSelect) {
+                document.getElementById(id).value = valueToSelect;
+            }
+
+            function getSelect(id) {
+                return document.getElementById(id).value;
+            }
+
+            function emptyElement(id) {
+                document.getElementById(id).innerHTML = '';
+            }
+
+            function drawIcon(name) {
+                var icon = document.createElement('i');
+                icon.classList.add('material-icons', 'md-18');
+                icon.innerText = name;
+                return icon;
+            }
+
+            function drawData(iconName, content) {
+
+                var icon = drawIcon(iconName);
+                icon.classList.add('col-1');
+
+                var contentContainer = document.createElement('div');
+                contentContainer.appendChild(content);
+                contentContainer.classList.add('col-11');
+
+                var row = document.createElement('div');
+                row.classList.add('row', 'align-items-center', 'flex-nowrap');
+                row.appendChild(icon);
+                row.appendChild(contentContainer);
+
+                var container = document.createElement('div');
+                container.appendChild(row);
+
+                return container;
+
+            }
+
+            function drawString(value) {
+                var div = document.createElement('div');
+                div.innerText = value;
+                return div;
+            }
+
+            function drawTitle(title) {
+                var ele = drawString(title);
+                ele.classList.add('font-weight-bold');
+                return ele;
+            }
+
+            function drawPrice(price) {
+                var val = price + '';
+                if (typeof price === 'number') {
+                    val = price.toLocaleString();
+                }
+                return drawData('stars', drawString(val));
+            }
+
+            function drawLocation(location) {
+                return drawData('map', drawString(location));
+            }
+
+            function drawSize(size) {
+                return drawData('straighten', drawString(size));
+            }
+
+            function drawMonth(monthIndex, on) {
+
+                var frac = 100 / 12;
+                var bar = document.createElement('div');
+                bar.classList.add('progress-bar');
+                bar.style = 'width: ' + frac + '%';
+                bar.innerText = MONTH_STRINGS[monthIndex-1];
+
+                if (on) {
+                    bar.classList.add('bg-success');
+                } else {
+                    bar.classList.add('bg-secondary');
+                }
+                
+                return bar;
+            }
+
+            function drawMonths(months) {
+
+                var prog = document.createElement('div');
+                prog.classList.add('progress');
+
+                for (var i = 1; i <=12; i++) {
+                    prog.appendChild(drawMonth(i, months === '*' || months.indexOf(i) !== -1));
+                }
+
+                return drawData('calendar_today', prog);
+            }
+
+            function drawHours(hours) {
+
+                var frac = 100 / 24;
+                var bar;
+
+                var prog = document.createElement('div');
+                prog.classList.add('progress');
+
+                if (hours === '*') {
+
+                    bar = document.createElement('div');
+                    bar.classList.add('progress-bar');
+                    bar.classList.add('bg-success');
+                    bar.style = 'width: 100%';
+                    bar.innerText = 'All day';
+                    prog.appendChild(bar);
+
+                } else {
+
+                    var prev = hours[0];
+
+                    if (hours[0] !== 0) {
+                        bar = document.createElement('div');
+                        bar.classList.add('progress-bar');
+                        bar.classList.add('bg-secondary');
+                        bar.style = 'width: ' + (frac*hours[0]) + '%';
+                        prog.appendChild(bar);
+                    }
+
+                    var on = true;
+                    for (var i=1; i < hours.length; i++) {
+                        
+                        bar = document.createElement('div');
+                        bar.classList.add('progress-bar');
+                        if (on) {
+                            bar.classList.add('bg-success');
+                            bar.innerText = prev + ' - ' + hours[i];
+                            on = false;
+                        } else {
+                            bar.classList.add('bg-secondary');
+                            on = true;
+                        }
+                        bar.style = 'width: ' + (frac*(hours[i]-prev)) + '%';
+                        prog.appendChild(bar);
+
+                        prev = hours[i];
+                    }
+
+                    if (prev < 24) {
+                        bar = document.createElement('div');
+                        bar.classList.add('progress-bar');
+                        bar.classList.add('bg-secondary');
+                        bar.style = 'width: ' + (frac*(24-prev)) + '%';
+                        prog.appendChild(bar);
+                    }
+                }
+
+                return drawData('schedule', prog);
+            }
+
+            function drawListItem(content) {
+                var item = document.createElement('li');
+                item.classList.add('list-group-item');
+                item.appendChild(content);
+                return item;
+            }
+
+            function drawImage(image) {
+
+                var img = document.createElement('img');
+                img.src = image;
+                img.classList.add('align-middle');
+                img.style = "max-width: 64px; max-height: 64px";
+
+                return img;
+            }
+
+            function drawBug(data) {
+
+                var img = drawImage('icon_bug/' + data.name.toLowerCase().replace(/ /g,'_') + '.png');
+                var imgContainer = document.createElement('div');
+                imgContainer.classList.add('col-2');
+                imgContainer.appendChild(img);
+
+                var nameContainer = drawTitle(data.name);
+
+                var dataContainer = document.createElement('div');
+                dataContainer.classList.add('col-md-4');
+
+                var price = drawPrice(data.price);
+                price.classList.add('col-6', 'col-md-12');
+                var location = drawLocation(data.location);
+                location.classList.add('col-6', 'col-md-12');
+
+                var dataContainerRow = document.createElement('div');
+                dataContainerRow.classList.add('row');
+                dataContainerRow.appendChild(price);
+                dataContainerRow.appendChild(location);
+
+                dataContainer.appendChild(dataContainerRow);
+
+                var timeContainer = document.createElement('div');
+                timeContainer.classList.add('col-md-8');
+                timeContainer.appendChild(drawMonths(data.months));
+                timeContainer.appendChild(drawHours(data.hours));
+
+                var dataRow = document.createElement('div');
+                dataRow.classList.add('row');
+                dataRow.appendChild(dataContainer);
+                dataRow.appendChild(timeContainer);
+
+                var infoContainer = document.createElement('div');
+                infoContainer.classList.add('col-10');
+                infoContainer.appendChild(nameContainer);
+                infoContainer.appendChild(dataRow);
+
+                var row = document.createElement('div');
+                row.classList.add('row');
+                row.appendChild(imgContainer);
+                row.appendChild(infoContainer);
+
+                var card = document.createElement('div');
+                card.classList.add('container-fluid', 'border-top', 'py-3');
+                card.appendChild(row);
+
+                var col = document.createElement('div');
+                col.classList.add('col-12');
+                col.appendChild(card);
+
+                return col;
+            }
+
+            function drawFish(data) {
+
+                var img = drawImage('icon_fish/' + data.name.toLowerCase().replace(/ /g,'_') + '.png');
+                var imgContainer = document.createElement('div');
+                imgContainer.classList.add('col-2');
+                imgContainer.appendChild(img);
+                
+                var nameContainer = drawTitle(data.name);
+
+                var dataContainer = document.createElement('div');
+                dataContainer.classList.add('col-md-2');
+                
+                var price = drawPrice(data.price);
+                price.classList.add('col-4', 'col-md-12');
+                var location = drawLocation(data.location);
+                location.classList.add('col-4', 'col-md-12');
+                var size = drawSize(data.shadowSize);
+                size.classList.add('col-4', 'col-md-12');
+                
+                var dataContainerRow = document.createElement('div');
+                dataContainerRow.classList.add('row');
+                dataContainerRow.appendChild(price);
+                dataContainerRow.appendChild(location);
+                dataContainerRow.appendChild(size);
+
+                dataContainer.appendChild(dataContainerRow);
+
+                var timeContainer = document.createElement('div');
+                timeContainer.classList.add('col-md-10');
+                timeContainer.appendChild(drawMonths(data.months));
+                timeContainer.appendChild(drawHours(data.hours));
+
+                var dataRow = document.createElement('div');
+                dataRow.classList.add('row');
+                dataRow.appendChild(dataContainer);
+                dataRow.appendChild(timeContainer);
+
+                var infoContainer = document.createElement('div');
+                infoContainer.classList.add('col-10');
+                infoContainer.appendChild(nameContainer);
+                infoContainer.appendChild(dataRow);
+
+                var row = document.createElement('div');
+                row.classList.add('row');
+                row.appendChild(imgContainer);
+                row.appendChild(infoContainer);
+
+                var card = document.createElement('div');
+                card.classList.add('container-fluid', 'border-top', 'py-3');
+                card.appendChild(row);
+
+                var col = document.createElement('div');
+                col.classList.add('col-12');
+                col.appendChild(card);
+
+                return col;
+            }
+
+            function populateResults(data) {
+
+                var i, row;
+
+                i = 0;
+                var bugContainer = document.getElementById('pills-bug');
+                data.bug.forEach(function(bug) {
+                    if (i%2===0) {
+                        row = document.createElement("div")
+                        row.classList.add('row');
+                        bugContainer.appendChild(row);
+                    }
+                    row.appendChild(drawBug(bug));
+                    i++;
+                });
+
+                i = 0;
+                var fishContainer = document.getElementById('pills-fish');
+                data.fish.forEach(function(fish) {
+                    if (i%2===0) {
+                        row = document.createElement("div")
+                        row.classList.add('row');
+                        fishContainer.appendChild(row);
+                    }
+                    row.appendChild(drawFish(fish));
+                    i++;
+                });
+            }
+
+            function refresh() {
+                // disable selects
+                emptyElement('pills-bug');
+                emptyElement('pills-fish');
+                populateResults(acnh.get({
+                    hemisphere: getButtonGroup('hemisphereSelect'),
+                    month: getSelect('monthSelect'),
+                    hour: getSelect('hourSelect')
+                }));
+                // enable selects
+            }
+
+            window.onload = function() {
+
+                updateModeSelect('modeSelect', 'modeToday', false);
+                refresh();
+
+                document.getElementById("monthSelect")
+                        .addEventListener('change', function() {
+                    refresh();
+                });
+                document.getElementById("hourSelect")
+                        .addEventListener('change', function() {
+                    refresh();
+                });
+            };
+        </script>
+    </body>
+</html>

@@ -1,10 +1,5 @@
 <html>
     <head>
-
-        <!--
-            TODO
-            * Offset month display for northern/southern hemisphere
-        -->
         
         <script src="lib.js"></script>
 
@@ -53,7 +48,7 @@
             <div class="collapse navbar-collapse justify-content-end py-3 py-sm-3 py-md-0" id="navbarSupportedContent">
                 <div class="navbar-nav">
                     <div class="navbar-item">
-                        <div class="btn-group btn-group-sm mr-4 mb-2 mb-sm-2 mb-md-0" role="group" aria-label="Hemisphere Select" id="hemisphereSelect">
+                        <div class="btn-group btn-group-sm mr-2 mb-2 mb-sm-2 mb-md-0" role="group" aria-label="Hemisphere Select" id="hemisphereSelect">
                             <button type="button" class="btn btn-primary" value='northern' onclick="setButtonGroup('hemisphereSelect', 'hemisphereNorth')" id="hemisphereNorth">North</button>
                             <button type="button" class="btn btn-secondary" value='southern' onclick="setButtonGroup('hemisphereSelect', 'hemisphereSouth')" id="hemisphereSouth">South</button>
                         </div>
@@ -416,12 +411,17 @@
                 infoContainer.appendChild(dataRow);
 
                 var row = document.createElement('div');
-                row.classList.add('row');
+                row.classList.add('row', 'border', 'p-2');
+                if (data.leavingSoon === true) {
+                    row.classList.add('border-warning');
+                } else if (data.newArrival) {
+                    row.classList.add('border-success');
+                }
                 row.appendChild(imgContainer);
                 row.appendChild(infoContainer);
 
                 var card = document.createElement('div');
-                card.classList.add('container-fluid', 'border-top', 'py-3');
+                card.classList.add('container-fluid', 'py-2');
                 card.appendChild(row);
 
                 var col = document.createElement('div');
@@ -474,12 +474,17 @@
                 infoContainer.appendChild(dataRow);
 
                 var row = document.createElement('div');
-                row.classList.add('row');
+                row.classList.add('row', 'border', 'p-2');
+                if (data.leavingSoon === true) {
+                    row.classList.add('border-warning');
+                } else if (data.newArrival) {
+                    row.classList.add('border-success');
+                }
                 row.appendChild(imgContainer);
                 row.appendChild(infoContainer);
 
                 var card = document.createElement('div');
-                card.classList.add('container-fluid', 'border-top', 'py-3');
+                card.classList.add('container-fluid', 'py-2');
                 card.appendChild(row);
 
                 var col = document.createElement('div');

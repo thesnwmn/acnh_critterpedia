@@ -40,10 +40,15 @@
            width: auto !important;
         }
 
+        .img-icon {
+            width: 64px;
+            height: 64px;
+        }
+
         .img-column {
-            -ms-flex: 0 0 80px;
-            flex: 0 0 80px;
-            max-width: 80px;
+            -ms-flex: 0 0 94px;
+            flex: 0 0 94px;
+            max-width: 94px;
         }
 
         .info-column {
@@ -380,15 +385,14 @@
 
                 var img = document.createElement('img');
                 img.src = image;
-                img.classList.add('align-middle');
-                img.style = "max-width: 64px; max-height: 64px";
+                img.classList.add('align-middle', 'img-icon');
 
                 return img;
             }
 
             function drawBug(data) {
 
-                var img = drawImage('icon_bug/' + data.name.toLowerCase().replace(/ /g,'_') + '.png');
+                var img = drawImage('icon_bug_small/' + data.name.toLowerCase().replace(/ |'|-/g,'') + '.png');
                 var imgContainer = document.createElement('div');
                 imgContainer.classList.add('col-2' , 'img-column');
                 imgContainer.appendChild(img);
@@ -448,7 +452,7 @@
 
             function drawFish(data) {
 
-                var img = drawImage('icon_fish/' + data.name.toLowerCase().replace(/ /g,'_') + '.png');
+                var img = drawImage('icon_fish_small/' + data.name.toLowerCase().replace(/ |'|-/g,'') + '.png');
                 var imgContainer = document.createElement('div');
                 imgContainer.classList.add('col-2', 'img-column');
                 imgContainer.appendChild(img);

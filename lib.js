@@ -285,7 +285,7 @@ var data = {
         hours: '*',
     }, {
         name: 'Brown Cicada',
-        price: 250
+        price: 250,
         location: ['On Trees'],
         months: [7, 8],
         hours: [8, 17],

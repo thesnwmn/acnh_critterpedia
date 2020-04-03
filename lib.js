@@ -285,19 +285,19 @@ var data = {
         hours: '*',
     }, {
         name: 'Brown Cicada',
-        price: '?',
+        price: 250
         location: ['On Trees'],
         months: [7, 8],
         hours: [8, 17],
     }, {
         name: 'Robust Cicada',
-        price: '?',
+        price: 300,
         location: ['On Trees'],
         months: [7, 8],
         hours: [8, 17],
     }, {
         name: 'Giant Cicada',
-        price: '?',
+        price: 500,
         location: ['On Trees'],
         months: [7, 8],
         hours: [8, 17],
@@ -309,13 +309,13 @@ var data = {
         hours: [8, 17],
     }, {
         name: 'Evening Cicada',
-        price: '?',
+        price: 550,
         location: ['On Trees'],
         months: [7, 8],
         hours: [4, 8, 16, 19],
     }, {
         name: 'Cicada shell',
-        price: '?',
+        price: 10,
         location: ['On Trees'],
         months: [7, 8],
         hours: '*',
@@ -339,13 +339,13 @@ var data = {
         hours: [8, 17],
     }, {
         name: 'Damselfly',
-        price: '?',
+        price: 500,
         location: ['Flying'],
         months: [1, 2, 11, 12],
         hours: '*',
     }, {
         name: 'Firefly',
-        price: '?',
+        price: 300,
         location: ['Flying'],
         months: [6],
         hours: [0, 4, 19, 24],
@@ -423,13 +423,13 @@ var data = {
         hours: '*',
     }, {
         name: 'Blue weevil beetle',
-        price: '?',
-        location: ['?'],
+        price: 800,
+        location: ['On Trees (Coconut?)'],
         months: [7, 8],
         hours: '*',
     }, {
         name: 'Dung beetle',
-        price: '?',
+        price: 3000,
         location: ['On ground (rolling snowballs)'],
         months: [1, 2, 12],
         hours: '*',
@@ -441,13 +441,13 @@ var data = {
         hours: '*',
     }, {
         name: 'Scarab beetle',
-        price: '?',
+        price: 10000,
         location: ['On Tree'],
         months: [7, 8],
         hours: [0, 8, 23, 24],
     }, {
         name: 'Drone beetle',
-        price: '?',
+        price: 200,
         location: ['On Tree'],
         months: [6, 7, 8],
         hours: '*',
@@ -459,19 +459,19 @@ var data = {
         hours: [0, 8, 17, 24],
     }, {
         name: 'Saw stag',
-        price: '?',
+        price: 2000,
         location: ['On Trees'],
         months: [7, 8],
         hours: '*',
     }, {
         name: 'Miyama stag',
-        price: '?',
+        price: 1000,
         location: ['On Trees'],
         months: [7, 8],
         hours: '*',
     }, {
         name: 'Giant stag',
-        price: '?',
+        price: 10000,
         location: ['On Trees'],
         months: [7, 8],
         hours: [0, 8, 23, 24],
@@ -483,7 +483,7 @@ var data = {
         hours: [0, 8, 19, 24],
     }, {
         name: 'Cyclommatus stag',
-        price: '?',
+        price: 8000,
         location: ['On Trees'],
         months: [7, 8],
         hours: [0, 8, 17, 24],
@@ -501,19 +501,19 @@ var data = {
         hours: [0, 8, 17, 24],
     }, {
         name: 'Horned dynastid',
-        price: '?',
+        price: 1350,
         location: ['On Trees'],
         months: [7, 8],
         hours: [0, 8, 17, 24],
     }, {
         name: 'Horned atlas',
-        price: '?',
+        price: 8000,
         location: ['On Trees'],
         months: [7, 8],
         hours: [0, 8, 17, 24],
     }, {
         name: 'Horned elephant',
-        price: '?',
+        price: 8000,
         location: ['On Trees'],
         months: [7, 8],
         hours: [0, 8, 17, 24],
@@ -525,7 +525,7 @@ var data = {
         hours: [0, 8, 17, 24],
     }, {
         name: 'Walking stick',
-        price: '?',
+        price: 600,
         location: ['Shaking Tree'],
         months: [7, 8, 9, 10, 11],
         hours: [4, 8, 17, 19],
@@ -543,7 +543,7 @@ var data = {
         hours: '*',
     }, {
         name: 'Ant',
-        price: '?',
+        price: 80,
         location: ['On rotten food'],
         months: '*',
         hours: '*',
@@ -573,7 +573,7 @@ var data = {
         hours: [0, 4, 17, 24],
     }, {
         name: 'Flea',
-        price: '?',
+        price: 70,
         location: ['Villager\'s Heads'],
         months: [4, 5, 6, 7, 8, 9, 10, 11],
         hours: '*',
@@ -1115,7 +1115,7 @@ var data = {
         name: 'Suckerfish',
         price: 1500,
         location: ['Sea'],
-        shadowSize: '? (Fin)',
+        shadowSize: '4 (Fin)',
         months: [6, 7, 8, 9],
         hours: '*',
     }, {

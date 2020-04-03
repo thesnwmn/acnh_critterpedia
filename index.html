@@ -34,10 +34,23 @@
             margin-top: 4px;
             margin-bottom: 4px;
         }
+        
         body{
-            min-width:400px;   
+            min-width: 500px;   
            width: auto !important;
-          }
+        }
+
+        .img-column {
+            -ms-flex: 0 0 80px;
+            flex: 0 0 80px;
+            max-width: 80px;
+        }
+
+        .info-column {
+            -ms-flex: 1;
+            flex: 1;
+            max-width: 100%;
+        }
         </style>
 
     </head>
@@ -377,7 +390,7 @@
 
                 var img = drawImage('icon_bug/' + data.name.toLowerCase().replace(/ /g,'_') + '.png');
                 var imgContainer = document.createElement('div');
-                imgContainer.classList.add('col-2');
+                imgContainer.classList.add('col-2' , 'img-column');
                 imgContainer.appendChild(img);
 
                 var nameContainer = drawTitle(data.name);
@@ -408,7 +421,7 @@
                 dataRow.appendChild(timeContainer);
 
                 var infoContainer = document.createElement('div');
-                infoContainer.classList.add('col-10');
+                infoContainer.classList.add('col-10', 'info-column');
                 infoContainer.appendChild(nameContainer);
                 infoContainer.appendChild(dataRow);
 
@@ -437,7 +450,7 @@
 
                 var img = drawImage('icon_fish/' + data.name.toLowerCase().replace(/ /g,'_') + '.png');
                 var imgContainer = document.createElement('div');
-                imgContainer.classList.add('col-2');
+                imgContainer.classList.add('col-2', 'img-column');
                 imgContainer.appendChild(img);
                 
                 var nameContainer = drawTitle(data.name);
@@ -471,7 +484,7 @@
                 dataRow.appendChild(timeContainer);
 
                 var infoContainer = document.createElement('div');
-                infoContainer.classList.add('col-10');
+                infoContainer.classList.add('col-10', 'info-column');
                 infoContainer.appendChild(nameContainer);
                 infoContainer.appendChild(dataRow);
 

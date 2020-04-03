@@ -85,17 +85,34 @@ var acnh = (function() {
         if (typeof filter.hour === 'string' && /\d/.test(filter.hour)) {
             filter.hour = Number.parseInt(filter.hour);
         }
-        
-        if (filter.hemisphere === 'southern' && typeof filter.month === 'number') {
-            filter.month = (filter.month + 6) % 12;
-            if (filter.month === 0) {
-                filter.month = 12;
-            }
-        }
 
         Object.keys(data).forEach(function(key) {
             if (filter.category === '' || filter.category === key) {
                 data[key].forEach(function(ele) {
+                    if (typeof ele['months_n'] === 'undefined') {
+                        if (ele.months === '*') {
+                            ele.months_n = ele.months;
+                            ele.months_s = ele.months;
+                        } else {
+                            ele.months_n = ele.months;
+                            ele.months_s = [];
+                            ele.months.forEach(function(month) {
+                                var newMonth = (month + 6) % 12;
+                                if (newMonth === 0) {
+                                    newMonth = 12;
+                                }
+                                ele.months_s.push(newMonth);
+                            });
+                            ele.months_s.sort();
+                        }
+                    } else {
+                        console.log('prep already done or not needed');
+                    }
+                    if (filter.hemisphere === 'southern') {
+                        ele.months = ele.months_s;
+                    } else {
+                        ele.months = ele.months_n;
+                    }
                     if (match(ele, filter)) {
                         ele.leavingSoon = leavingSoon(ele, filter);
                         ele.newArrival = newArrival(ele, filter);

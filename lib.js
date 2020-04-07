@@ -407,7 +407,7 @@ var data = {
         name: 'Violin beetle',
         price: 450,
         location: ['On a tree stump'],
-        months: [4, 5, 8, 9, 10],
+        months: [5, 6, 9, 10, 11],
         hours: '*',
     }, {
         name: 'Citrus Long-horned Beetle',

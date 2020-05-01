@@ -60,70 +60,80 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark bg-light fixed-top bg-dark">
-            <a class="navbar-brand" href="#">Critters</a>
+        <nav class="navbar navbar-dark bg-light fixed-top bg-dark">
+            <a class="navbar-brand flex-fill" href="#">Critters</a>
+            <!-- Filter controls -->
+            <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Filter Select" id="filterSelect">
+                <button type="button" class="btn btn-primary flex-sm-fill" id="filterAll" value="all" onclick="setButtonGroup('filterSelect', 'filterAll')">All</button>
+                <button type="button" class="btn btn-secondary flex-sm-fill" id="filterNew" value="new" onclick="setButtonGroup('filterSelect', 'filterNew')">New</button>
+                <button type="button" class="btn btn-primary flex-sm-fill" id="filterLeaving" value="leaving" onclick="setButtonGroup('filterSelect', 'filterLeaving')">Leaving</button>
+            </div>
+            <!-- Hemipshere controls -->
+            <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Hemisphere Select" id="hemisphereSelect">
+                <button type="button" class="btn btn-primary" value='northern' onclick="setButtonGroup('hemisphereSelect', 'hemisphereNorth')" id="hemisphereNorth">North</button>
+                <button type="button" class="btn btn-secondary" value='southern' onclick="setButtonGroup('hemisphereSelect', 'hemisphereSouth')" id="hemisphereSouth">South</button>
+            </div>
             <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end py-3 py-sm-3 py-md-0" id="navbarSupportedContent">
-                <div class="navbar-nav">
-                    <div class="navbar-item">
-                        <div class="btn-group btn-group-sm mr-2 mb-2 mb-sm-2 mb-md-0" role="group" aria-label="Hemisphere Select" id="hemisphereSelect">
-                            <button type="button" class="btn btn-primary" value='northern' onclick="setButtonGroup('hemisphereSelect', 'hemisphereNorth')" id="hemisphereNorth">North</button>
-                            <button type="button" class="btn btn-secondary" value='southern' onclick="setButtonGroup('hemisphereSelect', 'hemisphereSouth')" id="hemisphereSouth">South</button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="row mt-4 mr-2">
+                    <!-- Mode controls -->
+                    <label class="text-light col-2">Date:</label>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="btn-group btn-group-sm mb-2 flex-fill" role="group" aria-label="Mode Select" id="modeSelect">
+                                <button type="button" class="btn btn-primary flex-sm-fill" id="modeAll" value="all" onclick="updateModeSelect('modeSelect', 'modeAll')">All</button>
+                                <button type="button" class="btn btn-secondary flex-sm-fill" id="modeToday" value="today" onclick="updateModeSelect('modeSelect', 'modeToday')">Today</button>
+                                <button type="button" class="btn btn-primary flex-sm-fill" id="modeNow" value="now" onclick="updateModeSelect('modeSelect', 'modeNow')">Now</button>
+                                <button type="button" class="btn btn-secondary flex-sm-fill" id="modeCustom" value="custom" onclick="updateModeSelect('modeSelect', 'modeCustom')">Custom</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="navbar-item">
-                        <div class="btn-group btn-group-sm mr-2 mb-2 mb-sm-2 mb-md-0" role="group" aria-label="Mode Select" id="modeSelect">
-                            <button type="button" class="btn btn-primary flex-sm-fill" id="modeAll" value="all" onclick="updateModeSelect('modeSelect', 'modeAll')">All</button>
-                            <button type="button" class="btn btn-secondary flex-sm-fill" id="modeToday" value="today" onclick="updateModeSelect('modeSelect', 'modeToday')">Today</button>
-                            <button type="button" class="btn btn-primary flex-sm-fill" id="modeNow" value="now" onclick="updateModeSelect('modeSelect', 'modeNow')">Now</button>
-                            <button type="button" class="btn btn-secondary flex-sm-fill" id="modeCustom" value="custom" onclick="updateModeSelect('modeSelect', 'modeCustom')">Custom</button>
-                        </div>
-                    </div>
-                    <div class="form-inline navbar-item" id="timeSelect">
-                        <select class="form-control form-control-sm mr-sm-2 mb-2 mb-sm-0" id="monthSelect" class="d-inline">
-                            <option value="*">Any</option>
-                            <option value="1">January</option>
-                            <option value="2">February</option>
-                            <option value="3">March</option>
-                            <option value="4">April</option>
-                            <option value="5">May</option>
-                            <option value="6">June</option>
-                            <option value="7">July</option>
-                            <option value="8">August</option>
-                            <option value="9">September</option>
-                            <option value="10">October</option>
-                            <option value="11">November</option>
-                            <option value="12">December</option>
-                        </select>
-                        <select class="form-control form-control-sm mb-2 mb-sm-0" id="hourSelect">
-                            <option value="*">Any</option>
-                            <option value="0">00:00 - 00:59</option>
-                            <option value="1">01:00 - 01:59</option>
-                            <option value="2">02:00 - 02:59</option>
-                            <option value="3">03:00 - 03:59</option>
-                            <option value="4">04:00 - 04:59</option>
-                            <option value="5">05:00 - 05:59</option>
-                            <option value="6">06:00 - 06:59</option>
-                            <option value="7">07:00 - 07:59</option>
-                            <option value="8">08:00 - 08:59</option>
-                            <option value="9">09:00 - 09:59</option>
-                            <option value="10">10:00 - 10:59</option>
-                            <option value="11">11:00 - 11:59</option>
-                            <option value="12">12:00 - 12:59</option>
-                            <option value="13">13:00 - 13:59</option>
-                            <option value="14">14:00 - 14:59</option>
-                            <option value="15">15:00 - 15:59</option>
-                            <option value="16">16:00 - 16:59</option>
-                            <option value="17">17:00 - 17:59</option>
-                            <option value="18">18:00 - 18:59</option>
-                            <option value="19">19:00 - 19:59</option>
-                            <option value="20">20:00 - 20:59</option>
-                            <option value="21">21:00 - 21:59</option>
-                            <option value="22">22:00 - 22:59</option>
-                            <option value="23">23:00 - 23:59</option>
-                        </select>
+                        <!-- Date/time controls -->
+                        <form class="row form-inline">
+                            <select class="form-control form-control-sm mb-2 w-100" id="monthSelect">
+                                <option value="*">Any</option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <select class="form-control form-control-sm w-100" id="hourSelect">
+                                <option value="*">Any</option>
+                                <option value="0">00:00 - 00:59</option>
+                                <option value="1">01:00 - 01:59</option>
+                                <option value="2">02:00 - 02:59</option>
+                                <option value="3">03:00 - 03:59</option>
+                                <option value="4">04:00 - 04:59</option>
+                                <option value="5">05:00 - 05:59</option>
+                                <option value="6">06:00 - 06:59</option>
+                                <option value="7">07:00 - 07:59</option>
+                                <option value="8">08:00 - 08:59</option>
+                                <option value="9">09:00 - 09:59</option>
+                                <option value="10">10:00 - 10:59</option>
+                                <option value="11">11:00 - 11:59</option>
+                                <option value="12">12:00 - 12:59</option>
+                                <option value="13">13:00 - 13:59</option>
+                                <option value="14">14:00 - 14:59</option>
+                                <option value="15">15:00 - 15:59</option>
+                                <option value="16">16:00 - 16:59</option>
+                                <option value="17">17:00 - 17:59</option>
+                                <option value="18">18:00 - 18:59</option>
+                                <option value="19">19:00 - 19:59</option>
+                                <option value="20">20:00 - 20:59</option>
+                                <option value="21">21:00 - 21:59</option>
+                                <option value="22">22:00 - 22:59</option>
+                                <option value="23">23:00 - 23:59</option>
+                            </select>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -549,7 +559,8 @@
                 populateResults(acnh.get({
                     hemisphere: getButtonGroup('hemisphereSelect'),
                     month: getSelect('monthSelect'),
-                    hour: getSelect('hourSelect')
+                    hour: getSelect('hourSelect'),
+                    filter: getButtonGroup('filterSelect')
                 }));
                 // enable selects
             }
@@ -557,6 +568,7 @@
             window.onload = function() {
 
                 updateModeSelect('modeSelect', 'modeToday', false);
+                setButtonGroup('filterSelect', 'filterAll', false);
                 refresh();
 
                 document.getElementById("monthSelect")

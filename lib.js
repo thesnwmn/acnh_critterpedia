@@ -44,7 +44,19 @@ var acnh = (function() {
     }
 
     function match(target, filter) {
-        return matchMonth(target, filter) &&
+
+        var matches = true;
+
+        if (typeof filter.filter === "string") {
+            if (filter.filter === "new" && target.newArrival !== true) {
+                matches = false;
+            } else if (filter.filter === "leaving" && target.leavingSoon !== true) {
+                matches = false;
+            }
+        }
+
+        return matches &&
+               matchMonth(target, filter) &&
                matchHour(target, filter);
     }
 
@@ -105,17 +117,15 @@ var acnh = (function() {
                             });
                             ele.months_s.sort();
                         }
-                    } else {
-                        console.log('prep already done or not needed');
                     }
                     if (filter.hemisphere === 'southern') {
                         ele.months = ele.months_s;
                     } else {
                         ele.months = ele.months_n;
                     }
+                    ele.leavingSoon = leavingSoon(ele, filter);
+                    ele.newArrival = newArrival(ele, filter);
                     if (match(ele, filter)) {
-                        ele.leavingSoon = leavingSoon(ele, filter);
-                        ele.newArrival = newArrival(ele, filter);
                         result[key].push(ele);
                     }
                 });
